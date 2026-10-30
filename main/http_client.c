@@ -73,6 +73,10 @@ int downloadAndSaveFile(char * url, FILE * f, const char * cert_pem)
         free(buffer);
         return -1;
       }
+
+      /* The global bundle retains pointers into this mapping. Keep it mapped
+       * after registration, including when the download subsequently fails. */
+      is_mapped = false;
     }
   }
 
